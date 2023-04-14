@@ -13,13 +13,11 @@ request(`https://api.thecatapi.com/v1/breeds/search?q=${catQuery}`, (error, resp
     console.log("Cat breed match not found");
     return;
   }
-  let catinfo = JSON.parse(body);
 
-  for (cat in catinfo) {
+  let catinfo = JSON.parse(body);   //Parse the raw data into a JS object
+
+  for (cat in catinfo) {          // Print description for each matching breed
     console.log(catinfo[0]["description"]);
     console.log("====================");
   }
-
-  //console.log(catinfo[0]["description"]);
-  //console.log(catinfo[0][description]); // Print the result of the GET call based on catQuery input
 });
