@@ -1,5 +1,7 @@
 const request = require('request');
-const catQuery = (process.argv.slice(2, process.argv.length));
+let catQuery = (process.argv.slice(2, process.argv.length));
+
+catQuery = catQuery.join(' ');    //Allows for input to be multiple words (American short )
 
 
 request(`https://api.thecatapi.com/v1/breeds/search?q=${catQuery}`, (error, response, body) => {
@@ -12,6 +14,12 @@ request(`https://api.thecatapi.com/v1/breeds/search?q=${catQuery}`, (error, resp
     return;
   }
   let catinfo = JSON.parse(body);
-  console.log(catinfo[0]["description"]);
+
+  for (cat in catinfo) {
+    console.log(catinfo[0]["description"]);
+    console.log("====================");
+  }
+
+  //console.log(catinfo[0]["description"]);
   //console.log(catinfo[0][description]); // Print the result of the GET call based on catQuery input
 });
